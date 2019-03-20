@@ -53,19 +53,51 @@ int Tree::root()
 	return this->Root->value;
 }
 
-int Tree::parent(int)
+int Tree::parent(int val)
 {
-	return 0;
+	if (val == this->Root->value)
+	{
+		cout << "the value is root";
+		return -1;
+	}
+	else {
+
+		Node* temp = find(val);
+		if (contains(val)) {
+			return temp->parent->value;
+		}
+		else {
+			cout << "there is no such number in the tree";
+			return -1;
+		}
+	}
 }
 
-int Tree::left(int)
+int Tree::left(int val)
 {
-	return 0;
+	if (this.contains(val))
+	{
+		Node* temp = this->find(val);
+		return temp->left;
+	}
+	else {
+		cout << "there is no such value in the tree"
+			return -1;
+	}
 }
 
-int Tree::right(int)
+int Tree::right(int val)
 {
-	return 0;
+	if (this->contains(val))
+	{
+		Node* temp = this->find(val);
+		return temp->right;
+	}
+	else
+	{
+		cout << "there is no such value in the tree"
+			return -1;
+	}
 }
 
 void Tree::print()

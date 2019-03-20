@@ -9,7 +9,3 @@ Node::Node(int val)
 
 }
 
-int Node::getValue()
-{
-	return this->value;
-}

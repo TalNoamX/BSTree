@@ -10,5 +10,4 @@ public:
 	Node* parent;
 
 	Node(int);
-	int getValue();
 };
