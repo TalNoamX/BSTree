@@ -4,14 +4,13 @@
 
 void Tree::insert(int val)
 {
-	
-	if (this->Root == NULL) {
-
+	if (this->Root == NULL) 
+	{
 		Node *node = new Node(val);
 		this->Root = node;
 		this->size++;
-
 	}
+
 	else if (this->contains == false) {
 
 		Node *newNode = new Node(val);
@@ -43,9 +42,13 @@ int Tree::size()
 	return this->size;
 }
 
-bool Tree::contains(int)
+bool Tree::contains(int val)
 {
-	return false;
+	Node* current = this->find(val);
+	if (current == nullptr)
+		return false;
+	else
+		return true;
 }
 
 int Tree::root()
@@ -104,7 +107,26 @@ void Tree::print()
 {
 }
 
-Node * Tree::find(int)
+Node* Tree::find(int val)
 {
+	Node* current = Root;
+
+	while (current != nullptr) 
+	{
+
+		if (current->value == val)
+		{
+			return current;
+		}
+
+		else if (current->value > val)
+		{
+			current = current->left;
+		}
+		else if (current->value < val)
+		{
+			current = current->right;
+		}
+	}
 	return nullptr;
 }

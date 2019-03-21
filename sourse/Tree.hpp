@@ -1,13 +1,13 @@
 #include "Node.hpp"
 #include <vector>
-#include <map>
 
 class Tree {
-public:
+
 	Node* Root;
 	int size;
-	
+	Node* find(int searchVal);
 
+public:
 	void insert(int);
 	void remove(int);
 	int size();
@@ -17,8 +17,4 @@ public:
 	int left(int);
 	int right(int);
 	void print();
-
-private:
-	Node* find(int);
-	
 };

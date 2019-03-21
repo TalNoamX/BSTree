@@ -2,9 +2,10 @@
 
 using namespace std;
 
-class Node {
-public:
-	int value;
+
+struct Node 
+{
+	int   value;
 	Node* left;
 	Node* right;
 	Node* parent;

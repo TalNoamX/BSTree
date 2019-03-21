@@ -1,11 +1,5 @@
 #include "Node.hpp"
 
 Node::Node(int val)
-{
-	this->value = val;
-	this->left = NULL;
-	this->right = NULL;
-	this->parent = NULL;
-
-}
+	: value(val),left(nullptr),right(nullptr),parent(nullptr){}
 
