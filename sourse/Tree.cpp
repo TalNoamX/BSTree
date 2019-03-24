@@ -11,18 +11,18 @@ void Tree::insert(int val)
 		this->size++;
 	}
 
-	else if (this->contains == false) {
+	else if (this->contains(val) == false) {
 
 		Node *newNode = new Node(val);
-		Node *corrent = find(val);
+		Node *parent = findParent(val);
 
-		if (corrent->value > val) {
+		if (parent->value > val) {
 
-			corrent->left = newNode;
+			parent->left = newNode;
 		}
 		else {
 
-			corrent->right = newNode;
+			parent->right = newNode;
 		}
 		this->size++;
 	}
@@ -129,4 +129,26 @@ Node* Tree::find(int val)
 		}
 	}
 	return nullptr;
+}
+
+Node * Tree::findParent(int)
+{
+	Node* current = Root;
+	Node* parent = Root;
+
+
+	while (current != nullptr)
+	{
+		if (current->value > val)
+		{
+			parent = current;
+			current = current->left;
+		}
+		else if (current->value < val)
+		{
+			parent = current;
+			current = current->right;
+		}
+	}
+	return parent;
 }

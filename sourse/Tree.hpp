@@ -2,10 +2,12 @@
 #include <vector>
 
 class Tree {
-
+private:
 	Node* Root;
 	int size;
-	Node* find(int searchVal);
+
+	Node* find(int);
+	Node* findParent(int);
 
 public:
 	void insert(int);
