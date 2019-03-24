@@ -1,6 +1,6 @@
 #include <iostream>
 
-using namespace std;
+using namespace ariel;
 
 
 struct Node 
