@@ -11,7 +11,7 @@ void Tree::insert(int val)
 	{
 		Node *node = new Node(val);
 		this->Root = node;
-		this->size++;
+		this->Size++;
 	}
 
 	else if (this->contains(val) == false) { //if the Node is alredy in the tree than the function return false
@@ -27,7 +27,7 @@ void Tree::insert(int val)
 
 			parent->right = newNode;
 		}
-		this->size++;
+		this->Size++;
 	}
 	else {
 		cout << "ERROR: Node is already exists";
@@ -44,7 +44,7 @@ void Tree::remove(int val)
 /*return the size of the tree*/
 int Tree::size()
 {
-	return this->size;
+	return this->Size;
 }
 
 /* this function check if the number is already exists in the tree and return true or false */
@@ -262,6 +262,7 @@ Node * Tree::deleteNode(Node * root, int k)
 
 		// Delete Successor and return root 
 		delete succ;
+		this->Size--;
 		return root;
 	}
 }

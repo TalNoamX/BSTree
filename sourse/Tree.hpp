@@ -7,7 +7,7 @@ namespace ariel
 	class Tree {
 	private:
 		Node* Root;
-		int size;
+		int Size;
 
 		Node* find(int);
 		Node* findParent(int);

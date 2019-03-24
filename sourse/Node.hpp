@@ -1,14 +1,16 @@
 #include <iostream>
 
-using namespace ariel;
-
-
-struct Node 
+namespace ariel
 {
-	int   value;
-	Node* left;
-	Node* right;
-	Node* parent;
 
-	Node(int);
-};
+
+	struct Node
+	{
+		int   value;
+		Node* left;
+		Node* right;
+		Node* parent;
+
+		Node(int);
+	};
+}
