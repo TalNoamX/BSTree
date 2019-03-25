@@ -294,6 +294,7 @@ Node * ariel::Tree::deleteNode(Node * root, int k)
 
 		// Delete Successor and return root 
 		delete succ;
+		succ = nullptr;
 		return root;
 	}
 }
