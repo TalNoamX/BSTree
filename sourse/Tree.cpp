@@ -41,15 +41,22 @@ void ariel::Tree::insert(int val)
 		this->Size++;
 	}
 	else {
-		cout << "ERROR: Node is already exists"<<endl;
+		throw std::invalid_argument("insert faild: contains the element already");
 	}
-
 }
 
 /*Given value, remove the Node that keep's this value*/
 void ariel::Tree::remove(int val)
 {
-	this->deleteNode(Root, val);
+	if (this->contains(val))
+	{
+		this->deleteNode(Root, val);
+		this->Size--;
+	}
+	else
+	{
+		throw std::invalid_argument("remove faild: not contains the element");
+	}
 }
 
 /*return the size of the tree*/
@@ -71,28 +78,38 @@ bool ariel::Tree::contains(int val)
 /*this function return the root of the tree*/
 int ariel::Tree::root()
 {
-	return this->Root->value;
+	if (this->Root != nullptr)
+	{
+		return this->Root->value;
+	}
+	else
+	{
+		throw std::invalid_argument("Root is not exist");
+	}
 }
 
 /* this function return the value of the parent of val*/
 int ariel::Tree::parent(int val)
-{
-	if (val == this->Root->value) //if val is the value of the root than it has no parent
-	{
-		cout << "the value is root" << endl;
-		return -1;
-	}
-	else {
-
-		Node* temp = find(val);
-		if (temp != nullptr) {
-			return temp->parent->value;
-		}
-		else {
-			cout << "there is no such number in the tree"<< endl;
+{// i fixed line 81 & 91
+	if (this->Root != nullptr) {
+		if (val == this->Root->value) //if val is the value of the root than it has no parent
+		{
+			throw std::invalid_argument("Value belong to Root");
 			return -1;
 		}
+		else {
+
+			Node* temp = this->findParent(val);
+			if (temp != nullptr) {
+				return temp->value;
+			}
+			else {
+				throw std::invalid_argument("element not exist");
+				return -1;
+			}
+		}
 	}
+	else return -1;
 }
 
 /* this function return the left child of the Node with the value val*/
@@ -103,7 +120,7 @@ int ariel::Tree::left(int val)
 		Node* temp = this->find(val); //the Node withe the value of val
 		if (temp->left == nullptr) //if temp left child is null than print massage error
 		{
-			cout << "there is no left child for this Node" << endl;
+			throw std::invalid_argument("No left child for this elemnt");
 				return -1;
 		}
 		else
@@ -112,7 +129,7 @@ int ariel::Tree::left(int val)
 		}
 	}
 	else {
-		cout << "there is no such value in the tree" << endl;
+		throw std::invalid_argument("element not exist");
 			return -1;
 	}
 }
@@ -125,7 +142,7 @@ int ariel::Tree::right(int val)
 		Node* temp = this->find(val);  //temp is the Node with the value of val
 		if (temp->right == nullptr) //if temp right child is null than enter
 		{
-			cout << "there is no right child for this Node" << endl;
+			throw std::invalid_argument("No left child for this elemnt");
 			return -1;
 		}
 		else
@@ -134,9 +151,10 @@ int ariel::Tree::right(int val)
 		}
 	}
 	else {
-		cout << "there is no such value in the tree" << endl;
+		throw std::invalid_argument("element not exist");
 		return -1;
 	}
+	cout << "snir ha zain";
 }
 
 /*Given a binary tree, print its nodes in inorder*/
@@ -196,6 +214,10 @@ Node* ariel::Tree::findParent(int val)
 			parent = current;
 			current = current->right;
 		}
+		else
+		{
+			return parent;
+		}
 	}
 	return parent;
 }
@@ -241,13 +263,11 @@ Node * ariel::Tree::deleteNode(Node * root, int k)
 	if (root->left == NULL) {
 		Node* temp = root->right;
 		delete root;
-		this->Size--;
 		return temp;
 	}
 	else if (root->right == NULL) {
 		Node* temp = root->left;
 		delete root;
-		this->Size--;
 		return temp;
 	}
 
@@ -274,7 +294,6 @@ Node * ariel::Tree::deleteNode(Node * root, int k)
 
 		// Delete Successor and return root 
 		delete succ;
-		this->Size--;
 		return root;
 	}
 }

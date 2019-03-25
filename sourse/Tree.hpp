@@ -16,21 +16,21 @@ namespace ariel
 		Node* Root;
 		int Size;
 
-		Node* find(int);
-		Node* findParent(int);
+		Node* find(int val);
+		Node* findParent(int val);
 		void printer(Node* root);
 		Node* deleteNode(Node* root, int k);
 
 	public:
 		Tree();
-		void insert(int);
-		void remove(int);
+		void insert(int val);
+		void remove(int val);
 		int size();
-		bool contains(int);
+		bool contains(int val);
 		int root();
-		int parent(int);
-		int left(int);
-		int right(int);
+		int parent(int val);
+		int left(int val);
+		int right(int val);
 		void print();
 	};
 }
