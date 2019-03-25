@@ -1,5 +1,3 @@
-#include "Node.hpp"
-#include <vector>
 
 namespace ariel
 {
@@ -20,10 +18,11 @@ namespace ariel
 
 		Node* find(int);
 		Node* findParent(int);
-		Node* printer(Node* root);
+		void printer(Node* root);
 		Node* deleteNode(Node* root, int k);
 
 	public:
+		Tree();
 		void insert(int);
 		void remove(int);
 		int size();

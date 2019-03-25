@@ -1,13 +1,22 @@
 #include "Tree.hpp"
-#include "Node.hpp"
+#include <cstdlib>
+#include <iostream>
 
+
+using namespace std;
 using  ariel::Node;
 using ariel::Tree;
 
-Node::Node(int val): value(val), left(nullptr), right(nullptr), parent(nullptr) {}
+ariel::Node::Node(int val): value(val), left(nullptr), right(nullptr), parent(nullptr) {}
+
+ariel::Tree::Tree()
+{
+	this->Root = nullptr;
+	this->Size = 0;
+}
 
 /* this function put a new Node in the tree and increas its size by 1*/
-void Tree::insert(int val)
+void ariel::Tree::insert(int val)
 {
 	if (this->Root == nullptr) //if root is null than the tree is empty and the new Node will be the root
 	{
@@ -32,25 +41,25 @@ void Tree::insert(int val)
 		this->Size++;
 	}
 	else {
-		cout << "ERROR: Node is already exists";
+		cout << "ERROR: Node is already exists"<<endl;
 	}
 
 }
 
 /*Given value, remove the Node that keep's this value*/
-void Tree::remove(int val)
+void ariel::Tree::remove(int val)
 {
 	this->deleteNode(Root, val);
 }
 
 /*return the size of the tree*/
-int Tree::size()
+int ariel::Tree::size()
 {
 	return this->Size;
 }
 
 /* this function check if the number is already exists in the tree and return true or false */
-bool Tree::contains(int val)
+bool ariel::Tree::contains(int val)
 {
 	Node* current = this->find(val);
 	if (current == nullptr) //if current is null than the number is not in the tree
@@ -60,17 +69,17 @@ bool Tree::contains(int val)
 }
 
 /*this function return the root of the tree*/
-int Tree::root()
+int ariel::Tree::root()
 {
 	return this->Root->value;
 }
 
 /* this function return the value of the parent of val*/
-int Tree::parent(int val)
+int ariel::Tree::parent(int val)
 {
 	if (val == this->Root->value) //if val is the value of the root than it has no parent
 	{
-		cout << "the value is root";
+		cout << "the value is root" << endl;
 		return -1;
 	}
 	else {
@@ -80,16 +89,16 @@ int Tree::parent(int val)
 			return temp->parent->value;
 		}
 		else {
-			cout << "there is no such number in the tree";
+			cout << "there is no such number in the tree"<< endl;
 			return -1;
 		}
 	}
 }
 
 /* this function return the left child of the Node with the value val*/
-int Tree::left(int val)
+int ariel::Tree::left(int val)
 {
-	if (this.contains(val)) //if the number val is in the tree enter
+	if (this->contains(val)) //if the number val is in the tree enter
 	{
 		Node* temp = this->find(val); //the Node withe the value of val
 		if (temp->left == nullptr) //if temp left child is null than print massage error
@@ -109,9 +118,9 @@ int Tree::left(int val)
 }
 
 /* this function return the the value of the right child of val*/
-int Tree::right(int val)
+int ariel::Tree::right(int val)
 {
-	if (this.contains(val)) // if val is in the tree than enter
+	if (this->contains(val)) // if val is in the tree than enter
 	{
 		Node* temp = this->find(val);  //temp is the Node with the value of val
 		if (temp->right == nullptr) //if temp right child is null than enter
@@ -131,14 +140,13 @@ int Tree::right(int val)
 }
 
 /*Given a binary tree, print its nodes in inorder*/
-void Tree::print()
+void ariel::Tree::print()
 {
-	Node* node = Root;
-	this->printer(node); 
+	printer(this->Root); 
 }
 
 /*Given a value, find the Node that keep it if exists*/
-Node* Tree::find(int val)
+Node* ariel::Tree::find(int val)
 {
 	Node* current = Root;
 	/*based on binary search,
@@ -166,7 +174,7 @@ Node* Tree::find(int val)
 }
 
 /*  finds the supposed to be parent of a new node.*/
-Node* Tree::findParent(int)
+Node* ariel::Tree::findParent(int val)
 {
 	Node* current = Root;
 	Node* parent = Root;
@@ -193,23 +201,23 @@ Node* Tree::findParent(int)
 }
 
 /* www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder */
-void Tree::printer(Node* root) 
+void ariel::Tree::printer(Node* node)
 {
 	if (node == nullptr)
 		return;
 
 	/* first recur on left child */
-	print(node->left);
+	printer(node->left);
 
 	/* then print the data of node */
 	cout << node->value << " ";
 
 	/* now recur on right child */
-	print(node->right);
+	printer(node->right);
 }
 
 /* hwww.geeksforgeeks.org/binary-search-tree-set-2-delete */
-Node * Tree::deleteNode(Node * root, int k)
+Node * ariel::Tree::deleteNode(Node * root, int k)
 {
 	// Base case 
 	if (root == NULL)
@@ -217,11 +225,11 @@ Node * Tree::deleteNode(Node * root, int k)
 
 	// Recursive calls for ancestors of 
 	// node to be deleted 
-	if (root->key > k) {
+	if (root->value> k) {
 		root->left = deleteNode(root->left, k);
 		return root;
 	}
-	else if (root->key < k) {
+	else if (root->value < k) {
 		root->right = deleteNode(root->right, k);
 		return root;
 	}
@@ -233,11 +241,13 @@ Node * Tree::deleteNode(Node * root, int k)
 	if (root->left == NULL) {
 		Node* temp = root->right;
 		delete root;
+		this->Size--;
 		return temp;
 	}
 	else if (root->right == NULL) {
 		Node* temp = root->left;
 		delete root;
+		this->Size--;
 		return temp;
 	}
 
@@ -260,7 +270,7 @@ Node * Tree::deleteNode(Node * root, int k)
 		succParent->left = succ->right;
 
 		// Copy Successor Data to root 
-		root->key = succ->key;
+		root->value = succ->value;
 
 		// Delete Successor and return root 
 		delete succ;
