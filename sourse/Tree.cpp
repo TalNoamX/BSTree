@@ -1,8 +1,10 @@
 #include "Tree.hpp"
 #include "Node.hpp"
 
-using namespace ariel;
+using  ariel::Node;
+using ariel::Tree;
 
+Node::Node(int val): value(val), left(nullptr), right(nullptr), parent(nullptr) {}
 
 /* this function put a new Node in the tree and increas its size by 1*/
 void Tree::insert(int val)
