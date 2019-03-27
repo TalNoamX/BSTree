@@ -52,7 +52,7 @@ int main() {
 		.CHECK_EQUAL(mytree.root(), 25)
 		.CHECK_EQUAL(mytree.left(25), 15)
 		.CHECK_EQUAL(mytree.right(15), 17)
-		.CHECK_THROWS(mytree.insert(3))
+		.CHECK_THROWS(mytree.insert(25))
 		.CHECK_THROWS(mytree.remove(3))
 		.CHECK_OK(mytree.remove(15))
 		.CHECK_OK(mytree.remove(17))
@@ -60,10 +60,8 @@ int main() {
 		.CHECK_EQUAL(mytree.contains(35), true)
 		.CHECK_EQUAL(mytree.contains(5), false)
 		.CHECK_OK(mytree.print())
-		.print()
 		.CHECK_EQUAL(mytree.parent(33), 35)
-
-		;
+		.print();
 
 
 
